@@ -56,6 +56,7 @@ class MantisAzureOauthPlugin extends MantisPlugin {
 			$allowed_users_array = array_map('trim', explode(',', $allowed_users));
 			$blocked_domains_array = array_map('trim', explode(',', $blocked_domains));
 			
+			$t_flags = new AuthFlags();
 			// Check if user is from a blocked domain
 			$domain = '';
 			if (strpos($p_username, '@') !== false) {
@@ -63,7 +64,6 @@ class MantisAzureOauthPlugin extends MantisPlugin {
 				
 				// If user's domain is in the blocked list, disable standard login
 				if (in_array(strtolower($domain), $blocked_domains)) {
-					$t_flags = new AuthFlags();
 					$t_flags->setCanUseStandardLogin( false );
 					$t_flags->setPasswordManagedExternallyMessage( plugin_lang_get('passwordManagedElsewhereMessage') );
 					return $t_flags;
@@ -71,8 +71,9 @@ class MantisAzureOauthPlugin extends MantisPlugin {
 			}
 			
 			// If we have restrictions and user is not on allowed list, block standard login
+			// TODO: might accidentally block all users except from IdP 
 			if (!empty($allowed_users) && !in_array($p_username, $allowed_users_array)) {
-				$t_flags['can_use_standard_login'] = false;
+				$t_flags->setCanUseStandardLogin( false );
 			}
 			
 			return $t_flags;
