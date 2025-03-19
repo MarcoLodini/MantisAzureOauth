@@ -29,7 +29,7 @@ class MantisAzureOauthPlugin extends MantisPlugin {
             'clientSecret' => '',
             'redirectUri' => '',
 			'allowedUsersStandardLogin' => 'Administrator',
-			'blockedDomainsStandardLogin' => ''
+			'blockedDomainsStandardLogin' => '',
         );
     }
 	function init() {
