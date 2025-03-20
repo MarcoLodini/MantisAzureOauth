@@ -66,6 +66,13 @@ class MantisAzureOauthPlugin extends MantisPlugin {
 				if (in_array(strtolower($domain), $blocked_domains)) {
 					$t_flags->setCanUseStandardLogin( false );
 					$t_flags->setPasswordManagedExternallyMessage( plugin_lang_get('passwordManagedElsewhereMessage') );
+
+					# No long term session for identity provider to be able to kick users out.
+					$t_flags->setPermSessionEnabled( false );
+
+					# Enable re-authentication and use more aggressive timeout.
+					$t_flags->setReauthenticationEnabled( true );
+					$t_flags->setReauthenticationLifetime( 10 );
 					return $t_flags;
 				}
 			}
