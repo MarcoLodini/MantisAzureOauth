@@ -63,7 +63,7 @@ class MantisAzureOauthPlugin extends MantisPlugin {
 				list($user, $domain) = explode('@', $p_username);
 				
 				// If user's domain is in the blocked list, disable standard login
-				if (in_array(strtolower($domain), $blocked_domains)) {
+				if (in_array(strtolower($domain), $blocked_domains_array)) {
 					$t_flags->setCanUseStandardLogin( false );
 					$t_flags->setPasswordManagedExternallyMessage( plugin_lang_get('passwordManagedElsewhereMessage') );
 
