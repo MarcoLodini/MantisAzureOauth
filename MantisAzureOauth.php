@@ -49,6 +49,9 @@ class MantisAzureOauthPlugin extends MantisPlugin {
     }
 
 	function check_authentication( $p_event, $p_user_id ) {
+
+			$p_username = $p_args['username']
+
 		    // Get list of users allowed to use standard login
 			$allowed_users = plugin_config_get('allowedUsersStandardLogin', '');
 			$blocked_domains = plugin_config_get('blockedDomainsStandardLogin', ''); 
