@@ -48,7 +48,7 @@ class MantisAzureOauthPlugin extends MantisPlugin {
         );
     }
 
-	function check_authentication( $p_event, $p_user_id ) {
+	function check_authentication( $p_event, $p_args ) {
 
 			$p_username = $p_args['username']
 
